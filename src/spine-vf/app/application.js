@@ -1,4 +1,4 @@
-jQuery(function($){
+$(function($){
 
   window.App = Spine.Stack.sub({
     controllers:{

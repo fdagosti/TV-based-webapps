@@ -2,6 +2,16 @@ div {
 	color: red
 }
 
-.stack > *:not(.active) {
-  display: none
+.stack > *{
+	-webkit-transition: all 300ms linear;
+	position: absolute;
+	left: 30px;
+	top: 10px;
+
 }
+
+.stack > *:not(.active) {
+	left: -1000px;
+	top: 10px;  
+}
+
