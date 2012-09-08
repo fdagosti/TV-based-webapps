@@ -1,0 +1,7 @@
+div {
+	color: red
+}
+
+.stack > *:not(.active) {
+  display: none
+}
