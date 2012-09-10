@@ -5,7 +5,7 @@ ul {
  }
 li {
  border-left:1px solid black;
-
+float:left; 
  }
 ul li span {
      -webkit-transition: all 300ms ease-in-out;
@@ -13,12 +13,17 @@ ul li span {
  float:left;   
  width:100px;
  line-height:50px; /*hauteur de l'image de fond*/
- background:black ;
+ 
  color:#1DDCDC;
  text-decoration:none;
  text-align:center;
  }
 ul li span:hover {
- background:black ;
+ 
  color:white;
  }  
+
+ .selected {
+ 	color: yellow;
+ 	background:black ;
+ } 

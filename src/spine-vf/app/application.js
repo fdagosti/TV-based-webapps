@@ -24,9 +24,13 @@ $(function($){
   },
 
     el:"body",
-
     default: "banner"
   });
 
+  App.keyController = new gtv.jq.KeyController();
+  App.keyController.start();
+
   var app = new App;
+
+
 });
