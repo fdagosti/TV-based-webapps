@@ -919,16 +919,13 @@ gtv.jq.KeyController.prototype.keyDown_ = function(e) {
   }
   // We only want to allow navigation to items that are visible.
   var itemClass =
-      keyController.currentZone_.params.navSelectors.item + visibleSelector;
+      keyController.currentZone_.params.navSelectors.item;
   var itemParentClass =
-      keyController.currentZone_.params.navSelectors.itemParent +
-          visibleSelector;
+      keyController.currentZone_.params.navSelectors.itemParent;
   var itemParentRowClass =
-      keyController.currentZone_.params.navSelectors.itemRow +
-          visibleSelector;
+      keyController.currentZone_.params.navSelectors.itemRow;
   var itemParentRowPageClass =
-      keyController.currentZone_.params.navSelectors.itemPage +
-          visibleSelector;
+      keyController.currentZone_.params.navSelectors.itemPage;
 
   var newZone;
   var newSelected;
@@ -1021,6 +1018,7 @@ gtv.jq.KeyController.prototype.keyDown_ = function(e) {
 
       if (itemParentClass) {
         var parent = keyController.selectedItem_.parent();
+
         newSelected = parent.nextAll(itemParentClass).eq(0).find(itemClass);
       } else {
         newSelected = keyController.selectedItem_.nextAll(itemClass).eq(0);

@@ -7,12 +7,9 @@ div {
 	position: absolute;
 	left: 30px;
 	top: 10px;
-
 }
 
 .stack > *:not(.active) {
-	display: none;
 	left: -1000px;
-	top: 10px;  
 }
 

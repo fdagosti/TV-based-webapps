@@ -3,18 +3,16 @@ var Settings = Spine.Controller.sub({
   className: "settingsRoot",
 
   init: function(){
-    console.log("instantiating Settings");
 
     var zoneCreationParams = { 
       containerSelector: ".settingsRoot",
       navSelectors: {
-        item: "a",
-        itemParent: "li",
-        itemRow: ".ca-menu",
+        item: "div",
       },
       selectionClasses: {
         basic: "selected"
       },   
+      selectHidden:true,
     };
     this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
     
@@ -30,8 +28,6 @@ render: function(){
 
    if (that.isActive())
         that.setFocus();
-
-      console.log("toto settings"+that.isActive());
     });
     return this;
     },
@@ -47,7 +43,6 @@ render: function(){
     deactivate:function(){
       Spine.Controller.prototype.deactivate.apply(this);
       window.App.keyController.removeBehaviorZone(this.zone);
-
     },
 
     uiSet:false,
