@@ -1,9 +1,12 @@
 var Settings = Spine.Controller.sub({
+
+  className: "settingsRoot",
+
   init: function(){
     console.log("instantiating Settings");
 
     var zoneCreationParams = { 
-      containerSelector: ".ca-menu",
+      containerSelector: ".settingsRoot",
       navSelectors: {
         item: "a",
         itemParent: "li",
@@ -13,8 +16,7 @@ var Settings = Spine.Controller.sub({
         basic: "selected"
       },   
     };
-    var zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
-    window.App.keyController.addBehaviorZone(zone);
+    this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
     
     this.render();
   },
@@ -36,8 +38,16 @@ render: function(){
 
     activate:function(){
       Spine.Controller.prototype.activate.apply(this);
+      window.App.keyController.addBehaviorZone(this.zone);
+
       if (this.uiSet)
         this.setFocus();
+    },
+
+    deactivate:function(){
+      Spine.Controller.prototype.deactivate.apply(this);
+      window.App.keyController.removeBehaviorZone(this.zone);
+
     },
 
     uiSet:false,

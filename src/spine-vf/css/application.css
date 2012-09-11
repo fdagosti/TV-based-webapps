@@ -11,6 +11,7 @@ div {
 }
 
 .stack > *:not(.active) {
+	display: none;
 	left: -1000px;
 	top: 10px;  
 }

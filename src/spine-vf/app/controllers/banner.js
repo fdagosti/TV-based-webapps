@@ -1,10 +1,12 @@
 var Banner = Spine.Controller.sub({
 
+  className: "bannerRoot",
+
   init: function(){
     console.log("instantiating Banner");
 
     var zoneCreationParams = { 
-      containerSelector: ".banner",
+      containerSelector: ".bannerRoot",
       navSelectors: {
         item: "span",
         itemParent: "li",
@@ -14,8 +16,8 @@ var Banner = Spine.Controller.sub({
         basic: "selected"
       },   
     };
-    var zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
-    window.App.keyController.addBehaviorZone(zone);
+    this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
+    
 
     this.render();
   },
@@ -35,9 +37,16 @@ var Banner = Spine.Controller.sub({
 
   activate:function(){
     Spine.Controller.prototype.activate.apply(this);
-    
+    window.App.keyController.addBehaviorZone(this.zone);
+
+
     if (this.uiSet)
       this.setFocus();
+  },
+
+  deactivate:function(){
+    Spine.Controller.prototype.deactivate.apply(this);
+    window.App.keyController.removeBehaviorZone(this.zone);
   },
 
   uiSet:false,
