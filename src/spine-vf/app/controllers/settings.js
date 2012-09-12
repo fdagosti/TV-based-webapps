@@ -4,6 +4,13 @@ var Settings = Spine.Controller.sub({
 
   init: function(){
 
+this.routes({
+        "settings": function(params){
+          this.active();
+          console.log("settings", params.id)
+        },
+      });
+
     var zoneCreationParams = { 
       containerSelector: ".settingsRoot",
       navSelectors: {
@@ -15,6 +22,7 @@ var Settings = Spine.Controller.sub({
       selectHidden:true,
     };
     this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
+    window.App.keyController.addBehaviorZone(this.zone);
     
     this.render();
   },
@@ -35,7 +43,7 @@ render: function(){
     activate:function(){
       Spine.Controller.prototype.activate.apply(this);
       window.App.keyController.addBehaviorZone(this.zone);
-
+this.navigate("settings");
       if (this.uiSet)
         this.setFocus();
     },

@@ -5,6 +5,12 @@ var Banner = Spine.Controller.sub({
   init: function(){
     console.log("instantiating Banner");
 
+ this.routes({
+        "banner": function(params){
+          this.active();
+        },
+      });
+
     var zoneCreationParams = { 
       containerSelector: ".bannerRoot",
       navSelectors: {
@@ -17,7 +23,7 @@ var Banner = Spine.Controller.sub({
       },   
     };
     this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
-    
+    window.App.keyController.addBehaviorZone(this.zone);
 
     this.render();
   },
@@ -27,7 +33,6 @@ var Banner = Spine.Controller.sub({
   	var that = this;
     $.get("app/views/" + "banner.html", function(html){
       that.el.html(html);
-      var test = $("#firstOne");
       that.uiSet=true;
       if (that.isActive())
         that.setFocus();
@@ -38,10 +43,10 @@ var Banner = Spine.Controller.sub({
   activate:function(){
     Spine.Controller.prototype.activate.apply(this);
     window.App.keyController.addBehaviorZone(this.zone);
+this.navigate("banner");
 
-
-    if (this.uiSet)
-      this.setFocus();
+    if (this.uiSet) 
+     this.setFocus();
   },
 
   deactivate:function(){

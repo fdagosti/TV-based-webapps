@@ -8,28 +8,29 @@ $(function($){
 
     events: {
     "keydown": "keydown"
-  },
+    },
 
-  keydown: function(key){
-    console.log("key down key received "+key);
-    switch(key.keyCode){
-      case 49:
-        this.banner.active();
-        return true;
-      case 50:
-        this.settings.active();
-        return true;
-
-    }
-  },
+    keydown: function(key){
+      console.log("key down key received "+key);
+      switch(key.keyCode){
+        case 49:
+          this.banner.active();
+          return true;
+        case 50:
+          this.settings.active();
+          return true;
+      }
+    },
 
     el:"body",
-    default: "banner"
+    default: "banner",
+
   });
 
   App.keyController = new gtv.jq.KeyController();
   App.keyController.start();
 
+  Spine.Route.setup();
   var app = new App;
 
 
