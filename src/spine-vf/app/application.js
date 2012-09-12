@@ -1,5 +1,6 @@
-$(function($){
 
+$(function($){
+  
   window.App = Spine.Stack.sub({
     controllers:{
       banner: Banner,
@@ -23,15 +24,17 @@ $(function($){
     },
 
     el:"body",
-    default: "banner",
+    // no need for default, the routing will take care of it
+    // default: "banner",
 
   });
 
   App.keyController = new gtv.jq.KeyController();
   App.keyController.start();
 
-  Spine.Route.setup();
+  
   var app = new App;
-
-
+  Spine.Route.setup();
+  if (Spine.Route.getFragment() == "")
+    app.banner.active();
 });
