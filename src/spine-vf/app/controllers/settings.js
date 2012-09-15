@@ -7,7 +7,6 @@ var Settings = Spine.Controller.sub({
 this.routes({
         "settings": function(params){
           this.active();
-          console.log("settings", params.id)
         },
       });
 
@@ -19,10 +18,9 @@ this.routes({
       selectionClasses: {
         basic: "selected"
       },   
-      selectHidden:true,
+      useGeometry: true,
     };
     this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
-    window.App.keyController.addBehaviorZone(this.zone);
     
     this.render();
   },
@@ -42,20 +40,30 @@ render: function(){
 
     activate:function(){
       Spine.Controller.prototype.activate.apply(this);
+
+
+      if (!this.zoneSet){
+      this.zoneSet = true;
       window.App.keyController.addBehaviorZone(this.zone);
-this.navigate("settings");
+      }
+
+      this.navigate("settings");
       if (this.uiSet)
         this.setFocus();
     },
 
     deactivate:function(){
+
       Spine.Controller.prototype.deactivate.apply(this);
-      window.App.keyController.removeBehaviorZone(this.zone);
+      if (this.zoneSet){
+        this.zoneSet = false;
+        window.App.keyController.removeBehaviorZone(this.zone);
+      }
     },
 
     uiSet:false,
+    zoneSet:false,
     setFocus:function(){
-      console.log("setFocus Settings");
       window.App.keyController.setSelected($("#settingsFirstOne"));
     }
 

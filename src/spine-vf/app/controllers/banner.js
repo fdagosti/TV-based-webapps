@@ -21,9 +21,9 @@ var Banner = Spine.Controller.sub({
       selectionClasses: {
         basic: "selected"
       },   
+
     };
     this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
-    window.App.keyController.addBehaviorZone(this.zone);
 
     this.render();
   },
@@ -42,8 +42,11 @@ var Banner = Spine.Controller.sub({
 
   activate:function(){
     Spine.Controller.prototype.activate.apply(this);
-    window.App.keyController.addBehaviorZone(this.zone);
-this.navigate("banner");
+    if (!this.zoneSet){
+      this.zoneSet = true;
+      window.App.keyController.addBehaviorZone(this.zone);
+    }
+    this.navigate("banner");
 
     if (this.uiSet) 
      this.setFocus();
@@ -51,12 +54,15 @@ this.navigate("banner");
 
   deactivate:function(){
     Spine.Controller.prototype.deactivate.apply(this);
-    window.App.keyController.removeBehaviorZone(this.zone);
+    if (this.zoneSet){
+      this.zoneSet = false;
+      window.App.keyController.removeBehaviorZone(this.zone);
+    }
   },
 
   uiSet:false,
+  zoneSet:false,
   setFocus:function(){
-    console.log("setFocus Banner");
     window.App.keyController.setSelected($("#firstOne"));
   }
 });

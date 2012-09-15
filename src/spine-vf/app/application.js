@@ -30,10 +30,9 @@ $(function($){
   });
 
   App.keyController = new gtv.jq.KeyController();
-  App.keyController.start();
-
   
-  var app = new App;
+  window.app = new App;
+  App.keyController.start();
   Spine.Route.setup();
   if (Spine.Route.getFragment() == "")
     app.banner.active();
