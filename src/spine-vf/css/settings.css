@@ -18,3 +18,11 @@
  color: #fff;
     font-size: 60px;   
 }
+
+.detailsRoot div{
+    color: red;
+}
+
+.detailsRoot span{
+    color: red;
+}

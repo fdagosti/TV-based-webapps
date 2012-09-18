@@ -23,7 +23,7 @@ $(function($){
       }
     },
 
-    el:"body",
+    el:"body"
     // no need for default, the routing will take care of it
     // default: "banner",
 

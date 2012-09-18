@@ -6,9 +6,9 @@ var Banner = Spine.Controller.sub({
     console.log("instantiating Banner");
 
  this.routes({
-        "banner": function(params){
+        "banner": function(){
           this.active();
-        },
+        }
       });
 
     var zoneCreationParams = { 
@@ -16,11 +16,11 @@ var Banner = Spine.Controller.sub({
       navSelectors: {
         item: "span",
         itemParent: "li",
-        itemRow: "ul",
+        itemRow: "ul"
       },
       selectionClasses: {
         basic: "selected"
-      },   
+      }
 
     };
     this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
@@ -32,7 +32,7 @@ var Banner = Spine.Controller.sub({
   	// tests for ajax rendering ways
   	var that = this;
     $.get("app/views/" + "banner.html", function(html){
-      that.el.html(html);
+      that.html(html);
       that.uiSet=true;
       if (that.isActive())
         that.setFocus();
