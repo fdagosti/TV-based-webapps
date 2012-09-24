@@ -10,19 +10,32 @@ requirejs.config({
     app: '../app'
   },
   /*shim: {
-        'spine.1.0.8/manager': {
+        'spine.1.0.8/spine': {
             //These script dependencies should be loaded before loading
             //backbone.js
-            deps: ['jquery-1.8.1'],
+            deps: [ 
+            'spine.1.0.8/spine',
+                  'spine.1.0.8/manager',
+                  'spine.1.0.8/route'],
             //Once loaded, use the global 'Backbone' as the
             //module value.
-            exports: 'Backbone'
-        }
+            exports: 'Spine'
+        },
+       
     }*/
 
 });
 // Start the main app logic.
-requirejs(['app/controllers/banner', 'app/controllers/settings'], function(Banner, Settings) {
+requirejs([
+            'spine.1.0.8/spine',
+            'spine.1.0.8/manager',
+            'spine.1.0.8/route',
+            'app/controllers/banner', 
+            'app/controllers/settings',
+            'gtvcore',
+            'keycontrol',
+            ], 
+function(s,m,r,Banner, Settings) {
 
   $(function($) {
 
