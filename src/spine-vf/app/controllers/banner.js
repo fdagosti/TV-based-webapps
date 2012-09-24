@@ -1,69 +1,70 @@
-var Banner = Spine.Controller.sub({
+define(function() {
+  return Spine.Controller.sub({
 
-  className: "bannerRoot",
+    className: "bannerRoot",
 
-  init: function(){
-    console.log("instantiating Banner");
+    init: function() {
+      console.log("instantiating Banner");
 
- this.routes({
-        "banner": function(){
+      this.routes({
+        "banner": function() {
           this.active();
         }
       });
 
-    var zoneCreationParams = { 
-      containerSelector: ".bannerRoot",
-      navSelectors: {
-        item: "span",
-        itemParent: "li",
-        itemRow: "ul"
-      },
-      selectionClasses: {
-        basic: "selected"
+      var zoneCreationParams = {
+        containerSelector: ".bannerRoot",
+        navSelectors: {
+          item: "span",
+          itemParent: "li",
+          itemRow: "ul"
+        },
+        selectionClasses: {
+          basic: "selected"
+        }
+
+      };
+      this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
+
+      this.render();
+    },
+
+    render: function() {
+      // tests for ajax rendering ways
+      var that = this;
+      $.get("app/views/" + "banner.html", function(html) {
+        that.html(html);
+        that.uiSet = true;
+        if (that.isActive()) that.setFocus();
+      });
+      return this;
+    },
+
+    activate: function() {
+      Spine.Controller.prototype.activate.apply(this);
+      if (!this.zoneSet) {
+        this.zoneSet = true;
+        window.App.keyController.addBehaviorZone(this.zone);
       }
+      this.navigate("banner");
 
-    };
-    this.zone = new gtv.jq.KeyBehaviorZone(zoneCreationParams);
+      if (this.uiSet) this.setFocus();
+    },
 
-    this.render();
-  },
+    deactivate: function() {
+      Spine.Controller.prototype.deactivate.apply(this);
+      if (this.zoneSet) {
+        this.zoneSet = false;
+        window.App.keyController.removeBehaviorZone(this.zone);
+      }
+    },
 
-  render: function(){
-  	// tests for ajax rendering ways
-  	var that = this;
-    $.get("app/views/" + "banner.html", function(html){
-      that.html(html);
-      that.uiSet=true;
-      if (that.isActive())
-        that.setFocus();
-    });
-    return this;
-  },
-
-  activate:function(){
-    Spine.Controller.prototype.activate.apply(this);
-    if (!this.zoneSet){
-      this.zoneSet = true;
-      window.App.keyController.addBehaviorZone(this.zone);
+    uiSet: false,
+    zoneSet: false,
+    setFocus: function() {
+      console.log("setfocus banner");
+      window.App.keyController.setSelected($("#firstOne"));
     }
-    this.navigate("banner");
+  });
 
-    if (this.uiSet) 
-     this.setFocus();
-  },
-
-  deactivate:function(){
-    Spine.Controller.prototype.deactivate.apply(this);
-    if (this.zoneSet){
-      this.zoneSet = false;
-      window.App.keyController.removeBehaviorZone(this.zone);
-    }
-  },
-
-  uiSet:false,
-  zoneSet:false,
-  setFocus:function(){
-    window.App.keyController.setSelected($("#firstOne"));
-  }
 });
-
