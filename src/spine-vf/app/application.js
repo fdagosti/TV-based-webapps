@@ -26,16 +26,10 @@ requirejs.config({
 
 });
 // Start the main app logic.
-requirejs([
-            'spine.1.0.8/spine',
-            'spine.1.0.8/manager',
-            'spine.1.0.8/route',
-            'app/controllers/banner', 
+requirejs([ 'app/controllers/banner', 
             'app/controllers/settings',
-            'gtvcore',
-            'keycontrol',
             ], 
-function(s,m,r,Banner, Settings) {
+function(Banner, Settings) {
 
   $(function($) {
 
