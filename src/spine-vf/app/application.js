@@ -8,13 +8,12 @@ requirejs.config({
   //the paths config could be for a directory.
   paths: {
     app: '../app'
-  },
-  /*shim: {
+  }/*,
+  shim: {
         'spine.1.0.8/spine': {
             //These script dependencies should be loaded before loading
             //backbone.js
-            deps: [ 
-            'spine.1.0.8/spine',
+            deps: [ 'spine.1.0.8/spine',
                   'spine.1.0.8/manager',
                   'spine.1.0.8/route'],
             //Once loaded, use the global 'Backbone' as the
@@ -26,10 +25,7 @@ requirejs.config({
 
 });
 // Start the main app logic.
-requirejs([ 'app/controllers/banner', 
-            'app/controllers/settings',
-            ], 
-function(Banner, Settings) {
+requirejs(['app/controllers/banner', 'app/controllers/settings' ], function(Banner, Settings) {
 
   $(function($) {
 
@@ -47,10 +43,10 @@ function(Banner, Settings) {
         console.log("key down key received " + key);
         switch (key.keyCode) {
         case 49:
-          this.banner.active();
+          this.navigate("banner");
           return true;
         case 50:
-          this.settings.active();
+        this.navigate("settings");
           return true;
         }
       },

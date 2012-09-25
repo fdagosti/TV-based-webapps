@@ -21,18 +21,22 @@ define(["./details","./sidebar"], function(Details, SideBar) {
         this.setFocus();
       }));
 
-      this.sidebar.bind("focusChanged", this.proxy(function(newSelected) {
-        this.details.trigger("change", newSelected);
-      }));
-
-
     },
 
     activate: function() {
       Spine.Controller.prototype.activate.apply(this);
 
-      this.navigate("settings");
       if (this.uiSet) this.setFocus();
+
+      this.sidebar.bind("focusChanged", this.proxy(function(newSelected) {
+        this.details.trigger("change", newSelected);
+      }));
+    },
+
+    deactivate: function () {
+      console.log("deactive settings");
+      Spine.Controller.prototype.deactivate.apply(this);
+      this.sidebar.unbind("focusChanged");
     },
 
 

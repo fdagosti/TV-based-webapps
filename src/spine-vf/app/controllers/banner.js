@@ -46,7 +46,7 @@ define(function() {
         this.zoneSet = true;
         window.App.keyController.addBehaviorZone(this.zone);
       }
-      this.navigate("banner");
+      
 
       if (this.uiSet) this.setFocus();
     },
